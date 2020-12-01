@@ -2,6 +2,7 @@
 using Design_Patterns.Memento;
 using Design_Patterns.State;
 using Design_Patterns.Strategy;
+using Design_Patterns.Template;
 using System;
 
 namespace Design_Patterns
@@ -88,6 +89,18 @@ namespace Design_Patterns
                 new JpegCompressor(),
                 new BlackAndWhiteFilter()
                 );
+        }
+
+        /// <summary>
+        /// By using an abstract base class code duplication can be removed if multiple classes would do the same methods.
+        /// </summary>
+        static void Template()
+        {
+            var transferMoneyTask = new TransferMoneyTask();
+            transferMoneyTask.Execute();
+
+            var generateReportTask = new GenerateReportTask();
+            generateReportTask.Execute();
         }
     }
 }
