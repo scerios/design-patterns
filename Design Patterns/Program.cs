@@ -1,6 +1,7 @@
 ﻿using Design_Patterns.Iterator;
 using Design_Patterns.Memento;
 using Design_Patterns.State;
+using Design_Patterns.Strategy;
 using System;
 
 namespace Design_Patterns
@@ -73,6 +74,20 @@ namespace Design_Patterns
                 Console.WriteLine(url);
                 iterator.Next();
             }
+        }
+
+        /// <summary>
+        /// Quite similar to State pattern, difference is there is no state here at all. Dependency is injected right when calling the method.
+        /// One object's any methods can act in a lot of ways depending on what other classes are injected.
+        /// </summary>
+        static void Strategy()
+        {
+            var imageStorage = new ImageStorage();
+            imageStorage.Store(
+                "File",
+                new JpegCompressor(),
+                new BlackAndWhiteFilter()
+                );
         }
     }
 }
