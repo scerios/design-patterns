@@ -1,4 +1,5 @@
 ﻿using Design_Patterns.Memento;
+using Design_Patterns.State;
 using System;
 
 namespace Design_Patterns
@@ -10,6 +11,9 @@ namespace Design_Patterns
             
         }
 
+        /// <summary>
+        /// Basically it keeps the state of an object in a list so it can be recovered and restored.
+        /// </summary>
         static void Memento()
         {
             var editor = new Editor();
@@ -29,6 +33,21 @@ namespace Design_Patterns
 
             // Restoring the previous ("A") one.
             editor.Restore(history.Pop());
+        }
+
+        /// <summary>
+        /// Useful abstraction technic to avoid too many if statements. Polymorphism and dependency injection all at once.
+        /// </summary>
+        static void State()
+        {
+            var canvas = new Canvas();
+            canvas.CurrentTool = new SelectionTool();
+            canvas.MouseDown();
+            canvas.MouseUp();
+
+            canvas.CurrentTool = new BrushTool();
+            canvas.MouseDown();
+            canvas.MouseUp();
         }
     }
 }
