@@ -1,4 +1,5 @@
-﻿using Design_Patterns.Memento;
+﻿using Design_Patterns.Iterator;
+using Design_Patterns.Memento;
 using Design_Patterns.State;
 using System;
 
@@ -37,10 +38,13 @@ namespace Design_Patterns
 
         /// <summary>
         /// Useful abstraction technic to avoid too many if statements. Polymorphism and dependency injection all at once.
+        /// Limitation is there is only 1 state which can be active.
         /// </summary>
         static void State()
         {
             var canvas = new Canvas();
+
+            // MouseDown() and MouseUp() going to do differently based on which Tool is applied.
             canvas.CurrentTool = new SelectionTool();
             canvas.MouseDown();
             canvas.MouseUp();
@@ -48,6 +52,27 @@ namespace Design_Patterns
             canvas.CurrentTool = new BrushTool();
             canvas.MouseDown();
             canvas.MouseUp();
+        }
+
+        /// <summary>
+        /// Since the Iterator doesn't depend on the type of collection, the same code can be used to iterate through any collection. 
+        /// If collection is changed, only the class that holds the collection has to be changed aswell.
+        /// </summary>
+        static void Iterator()
+        {
+            var history = new BrowseHistory();
+            history.Push("A");
+            history.Push("B");
+            history.Push("C");
+
+            var iterator = history.createIterator();
+
+            while (iterator.HasNext())
+            {
+                var url = iterator.Current();
+                Console.WriteLine(url);
+                iterator.Next();
+            }
         }
     }
 }
