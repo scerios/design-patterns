@@ -1,4 +1,7 @@
-﻿using Design_Patterns.Iterator;
+﻿using Design_Patterns.Command;
+using Design_Patterns.Command.editor;
+using Design_Patterns.Command.fx;
+using Design_Patterns.Iterator;
 using Design_Patterns.Memento;
 using Design_Patterns.State;
 using Design_Patterns.Strategy;
@@ -11,7 +14,7 @@ namespace Design_Patterns
     {
         static void Main(string[] args)
         {
-            
+
         }
 
         /// <summary>
@@ -20,7 +23,7 @@ namespace Design_Patterns
         static void Memento()
         {
             var editor = new Editor();
-            var history = new History();
+            var history = new Memento.History();
 
             // Creating a new content and saving it as a state.
             editor.Content = "A";
@@ -101,6 +104,40 @@ namespace Design_Patterns
 
             var generateReportTask = new GenerateReportTask();
             generateReportTask.Execute();
+        }
+
+        /// <summary>
+        /// With Command its easy to build an independent framework that anyone can use. By creating a custom service which implements a base interface,
+        /// any command can be run with the same method, depending on the service.
+        /// </summary>
+        static void Command()
+        {
+            // One command attached to an action.
+            var service = new CustomerService();
+            var command = new AddCustomerCommand(service);
+            var button = new Button(command);
+            button.Click();
+
+            // Multiple commands attached to an action.
+            var composite = new CompositeCommand();
+            composite.Add(new ResizeCommand());
+            composite.Add(new BlackAndWhiteCommand());
+            composite.Execute();
+
+            // Using the undo mechanism. Multiple commands are implementing the same interface(s) and using the same history.
+            var history = new Command.editor.History();
+            var document = new HtmlDocument();
+            document.Content = "Hello";
+
+            var boldCommand = new BoldCommand(document, history);
+            boldCommand.Execute();
+
+            Console.WriteLine(document.Content);
+
+            var undoCommant = new UndoCommand(history);
+            undoCommant.Execute();
+
+            Console.WriteLine(document.Content);
         }
     }
 }
