@@ -3,6 +3,7 @@ using Design_Patterns.Command.editor;
 using Design_Patterns.Command.fx;
 using Design_Patterns.Iterator;
 using Design_Patterns.Memento;
+using Design_Patterns.Observer;
 using Design_Patterns.State;
 using Design_Patterns.Strategy;
 using Design_Patterns.Template;
@@ -138,6 +139,28 @@ namespace Design_Patterns
             undoCommant.Execute();
 
             Console.WriteLine(document.Content);
+        }
+
+        /// <summary>
+        /// By adding different Observers (interfaces) to a list, whenever a selected property's setter is used, all the observers can be notified and
+        /// all of them can behave differently.
+        /// 
+        /// There are 2 additional styles:
+        /// Push style: Any value can be added as a parameter to the NotifyObservers(value).
+        /// Pull style: Every observer will have an inverse coupling with the DataSource which is flexible and they will get their values independently.
+        /// </summary>
+        static void Observer()
+        {
+            var dataSource = new DataSource();
+            var sheetOne = new SpreadSheet();
+            var sheetTwo = new SpreadSheet();
+            var chart = new Chart();
+
+            dataSource.AddObserver(sheetOne);
+            dataSource.AddObserver(sheetTwo);
+            dataSource.AddObserver(chart);
+
+            dataSource.Value = 1;
         }
     }
 }
