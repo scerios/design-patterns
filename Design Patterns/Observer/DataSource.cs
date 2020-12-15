@@ -6,11 +6,12 @@ namespace Design_Patterns.Observer
 {
     public class DataSource : Subject
     {
+        private int _value;
         public int Value {
-            get => Value;
+            get => _value;
             set
             {
-                Value = value;
+                _value = value;
                 NotifyObservers();
 
                 // Push style communication

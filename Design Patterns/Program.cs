@@ -2,6 +2,7 @@
 using Design_Patterns.Command.editor;
 using Design_Patterns.Command.fx;
 using Design_Patterns.Iterator;
+using Design_Patterns.Mediator;
 using Design_Patterns.Memento;
 using Design_Patterns.Observer;
 using Design_Patterns.State;
@@ -116,7 +117,7 @@ namespace Design_Patterns
             // One command attached to an action.
             var service = new CustomerService();
             var command = new AddCustomerCommand(service);
-            var button = new Button(command);
+            var button = new Command.fx.Button(command);
             button.Click();
 
             // Multiple commands attached to an action.
@@ -161,6 +162,15 @@ namespace Design_Patterns
             dataSource.AddObserver(chart);
 
             dataSource.Value = 1;
+        }
+
+        /// <summary>
+        /// Among the classes there's a meditor class which helps all the other classes communicate with each other without having any coupling.
+        /// </summary>
+        static void Mediator()
+        {
+            var dialog = new ArticlesDialogBox();
+            dialog.SimulateUserInteraction();
         }
     }
 }
