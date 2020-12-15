@@ -6,11 +6,12 @@ namespace Design_Patterns.Mediator
 {
     public class ListBox : UIControl
     {
+        private string _selection;
         public string Selection {
-            get => Selection; 
+            get => _selection; 
             set
             {
-                Selection = value;
+                _selection = value;
                 Owner.Changed(this);
             }
         }

@@ -6,11 +6,12 @@ namespace Design_Patterns.Mediator
 {
     public class Button : UIControl
     {
+        private bool _isEnabled;
         public bool IsEnabled {
-            get => IsEnabled;
+            get => _isEnabled;
             set
             {
-                IsEnabled = value;
+                _isEnabled = value;
                 Owner.Changed(this);
             }
         }

@@ -6,11 +6,12 @@ namespace Design_Patterns.Mediator
 {
     public class TextBox : UIControl
     {
+        private string _content;
         public string Content {
-            get => Content;
+            get => _content;
             set
             {
-                Content = value;
+                _content = value;
                 Owner.Changed(this);
             }
         }
