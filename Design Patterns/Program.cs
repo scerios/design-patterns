@@ -1,4 +1,5 @@
-﻿using Design_Patterns.Command;
+﻿using Design_Patterns.Chain_of_responsibility;
+using Design_Patterns.Command;
 using Design_Patterns.Command.editor;
 using Design_Patterns.Command.fx;
 using Design_Patterns.Iterator;
@@ -16,7 +17,7 @@ namespace Design_Patterns
     {
         static void Main(string[] args)
         {
-            Mediator();
+            ChainOfResponsibility();
         }
 
         /// <summary>
@@ -171,6 +172,22 @@ namespace Design_Patterns
         {
             var dialog = new ArticlesDialogBox();
             dialog.SimulateUserInteraction();
+        }
+
+        /// <summary>
+        /// By using a chain, tight coupling can be get rid of. Whenever a new link is added to anywhere in the chain, the handling class doesn't need to be recompiled.
+        /// This system is open to extensions and close to modifications. (Open-Close principle)
+        /// </summary>
+        static void ChainOfResponsibility()
+        {
+            // authentication -> log -> compress
+            var compressor = new Compressor(null);
+            var logger = new Logger(compressor);
+            var authenticator = new Authenticator(logger);
+
+            var server = new WebServer(authenticator);
+            server.Handle(new HttpRequest("admin", "1234"));
+
         }
     }
 }
