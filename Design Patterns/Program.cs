@@ -22,6 +22,8 @@ namespace Design_Patterns
         }
 
         /// <summary>
+        /// Allows restoring an object to a previous state.
+        /// 
         /// Basically it keeps the state of an object in a list so it can be recovered and restored.
         /// </summary>
         static void Memento()
@@ -46,6 +48,8 @@ namespace Design_Patterns
         }
 
         /// <summary>
+        /// Allows an object to behave differently depending on the state it is in.
+        /// 
         /// Useful abstraction technic to avoid too many if statements. Polymorphism and dependency injection all at once.
         /// Limitation is there is only 1 state which can be active.
         /// </summary>
@@ -64,6 +68,8 @@ namespace Design_Patterns
         }
 
         /// <summary>
+        /// Allows iterating over an object without having to expose the object’s internal structure (which may change in the future).
+        /// 
         /// Since the Iterator doesn't depend on the type of collection, the same code can be used to iterate through any collection. 
         /// If collection is changed, only the class that holds the collection has to be changed aswell.
         /// </summary>
@@ -85,6 +91,9 @@ namespace Design_Patterns
         }
 
         /// <summary>
+        /// Allows passing different algorithms (behaviours) to an object. Allows defining a template (skeleton) for an operation.
+        /// Specific steps will then be implemented in subclasses.
+        /// 
         /// Quite similar to State pattern, difference is there is no state here at all. Dependency is injected right when calling the method.
         /// One object's any methods can act in a lot of ways depending on what other classes are injected.
         /// </summary>
@@ -111,6 +120,8 @@ namespace Design_Patterns
         }
 
         /// <summary>
+        /// Allows decouple a sender from a receiver. The sender will talk to the receive through a command. Commands can be undone and persisted.
+        /// 
         /// With Command its easy to build an independent framework that anyone can use. By creating a custom service which implements a base interface,
         /// any command can be run with the same method, depending on the service.
         /// </summary>
@@ -145,6 +156,8 @@ namespace Design_Patterns
         }
 
         /// <summary>
+        /// Allows an object notify other objects when its state changes.
+        /// 
         /// By adding different Observers (interfaces) to a list, whenever a selected property's setter is used, all the observers can be notified and
         /// all of them can behave differently.
         /// 
@@ -167,6 +180,8 @@ namespace Design_Patterns
         }
 
         /// <summary>
+        /// Allows an object to encapsulate the communication between other objects.
+        /// 
         /// Among the classes there's a meditor class which helps all the other classes communicate with each other without having any coupling.
         /// </summary>
         static void Mediator()
@@ -176,6 +191,8 @@ namespace Design_Patterns
         }
 
         /// <summary>
+        /// Allows building a chain of objects to process a request.
+        /// 
         /// By using a chain, tight coupling can be get rid of. Whenever a new link is added to anywhere in the chain, the handling class doesn't need to be recompiled.
         /// This system is open to extensions and close to modifications. (Open-Close principle)
         /// </summary>
@@ -192,6 +209,8 @@ namespace Design_Patterns
         }
 
         /// <summary>
+        /// Allows adding new operations to an object structure without modifying it.
+        /// 
         /// Use only if object structure is stable but new operations are modified frequently.
         /// By adding an extensibility point, new type of operations can be added to an element without modifying the element itself. 
         /// </summary>
