@@ -9,6 +9,7 @@ using Design_Patterns.Observer;
 using Design_Patterns.State;
 using Design_Patterns.Strategy;
 using Design_Patterns.Template;
+using Design_Patterns.Visitor;
 using System;
 
 namespace Design_Patterns
@@ -17,7 +18,7 @@ namespace Design_Patterns
     {
         static void Main(string[] args)
         {
-            ChainOfResponsibility();
+            
         }
 
         /// <summary>
@@ -129,7 +130,7 @@ namespace Design_Patterns
 
             // Using the undo mechanism. Multiple commands are implementing the same interface(s) and using the same history.
             var history = new Command.editor.History();
-            var document = new HtmlDocument();
+            var document = new Command.editor.HtmlDocument();
             document.Content = "Hello";
 
             var boldCommand = new BoldCommand(document, history);
@@ -188,6 +189,18 @@ namespace Design_Patterns
             var server = new WebServer(authenticator);
             server.Handle(new HttpRequest("admin", "1234"));
 
+        }
+
+        /// <summary>
+        /// Use only if object structure is stable but new operations are modified frequently.
+        /// By adding an extensibility point, new type of operations can be added to an element without modifying the element itself. 
+        /// </summary>
+        static void Visitor()
+        {
+            var document = new Visitor.HtmlDocument();
+            document.AddNode(new HeadingNode());
+            document.AddNode(new AnchorNode());
+            document.Execute(new HighlightOperation());
         }
     }
 }
